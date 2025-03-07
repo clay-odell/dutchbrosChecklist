@@ -1,7 +1,7 @@
 {
   "name": "dutchtasks-app",
   "private": true,
-  "homepage": "https://clay-odell.github.io/dutchbrosChecklist"
+  "homepage": "https://clay-odell.github.io/dutchbrosChecklist",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
