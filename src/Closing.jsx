@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import TaskSection from "./TaskSection";
+import ClearTasksButton from "./ClearTasks";
 
 const Closing = ({ resetFlag }) => {
   // Use `useMemo` to memoize `tasksData`
@@ -133,6 +134,8 @@ const Closing = ({ resetFlag }) => {
       <h2>Closing Tasks</h2>
       <p>Nightly tasks for shutting down the shop.</p>
 
+      <ClearTasksButton taskStates={taskStates} setTaskStates={setTaskStates} />
+      <br />
       {tasksData.map(({ title, tasks }) => (
         <TaskSection
           key={title}
