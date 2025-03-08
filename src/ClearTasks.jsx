@@ -7,13 +7,11 @@ const ClearTasksButton = ({ taskStates, setTaskStates }) => {
 
     // Properly use reduce to reset all tasks to false
     const clearedStates = Object.keys(taskStates).reduce((acc, title) => {
-      acc[title] = taskStates[title].map(() => false);
-      return acc; 
-    }, {});
+      acc[title] = taskStates[title].map(() => false); // Reset task states
+      return acc; // Return the accumulator for the next iteration
+    }, {}); // Initialize accumulator as an empty object
 
-    setTaskStates(clearedStates);
-    localStorage.removeItem("openingTasksState"); // Optional: Adjust local storage clearing logic as needed
-    localStorage.removeItem("closingTasksState"); // Optional for Closing component tasks
+    setTaskStates(clearedStates); // Update state with cleared states
   };
 
   return (
