@@ -99,34 +99,54 @@ const Mid = ({ selectedWeek, resetFlag }) => {
     return selectedWeek === "Weeks 1 & 3" ? tasksData.weekA : tasksData.weekB;
   }, [selectedWeek, tasksData]);
 
-  const initializeTaskStates = (tasks) =>
-    tasks.map((day) => day.tasks.map(() => false));
+  // Helper function to generate unique localStorage keys based on the week
+  const getLocalStorageKey = (week, day) => `midTasksState_${week}_${day}`;
 
-  const loadInitialTaskStates = (tasksByWeek) => {
-    const savedStates = JSON.parse(localStorage.getItem("midTasksState"));
-    if (savedStates) {
-      return savedStates;
-    }
-    return initializeTaskStates(tasksByWeek);
+  const initializeTaskStates = (tasks) =>
+    tasks.map(() => false);
+
+  const loadInitialTaskStates = () => {
+    // Load task states for the specific week and day
+    return tasksByWeek.map(({ title }) => {
+      const key = getLocalStorageKey(
+        selectedWeek === "Weeks 1 & 3" ? "weekA" : "weekB",
+        title
+      );
+      const savedStates = JSON.parse(localStorage.getItem(key));
+      return savedStates || initializeTaskStates(tasksByWeek.find(({ title: t }) => t === title).tasks);
+    });
   };
 
-  const [taskStates, setTaskStates] = useState(() =>
-    loadInitialTaskStates(tasksByWeek)
-  );
+  const [taskStates, setTaskStates] = useState(() => loadInitialTaskStates());
 
-  // Save state to localStorage whenever taskStates change
+  // Save the state for a specific day to localStorage whenever taskStates change
   useEffect(() => {
-    localStorage.setItem("midTasksState", JSON.stringify(taskStates));
-  }, [taskStates]);
+    taskStates.forEach((dayState, dayIndex) => {
+      const { title } = tasksByWeek[dayIndex];
+      const key = getLocalStorageKey(
+        selectedWeek === "Weeks 1 & 3" ? "weekA" : "weekB",
+        title
+      );
+      localStorage.setItem(key, JSON.stringify(dayState));
+    });
+  }, [taskStates, tasksByWeek, selectedWeek]);
 
-  // Reset state and clear localStorage on `resetFlag` or `selectedWeek` change
+  // Reset all states and clear relevant localStorage keys on `resetFlag`
   useEffect(() => {
-    if (resetFlag || selectedWeek) {
-      const freshStates = initializeTaskStates(tasksByWeek);
+    if (resetFlag) {
+      const freshStates = tasksByWeek.map(({ tasks }) =>
+        initializeTaskStates(tasks)
+      );
       setTaskStates(freshStates);
-      localStorage.removeItem("midTasksState"); // Clear local storage on reset
+      tasksByWeek.forEach(({ title }) => {
+        const key = getLocalStorageKey(
+          selectedWeek === "Weeks 1 & 3" ? "weekA" : "weekB",
+          title
+        );
+        localStorage.removeItem(key);
+      });
     }
-  }, [resetFlag, tasksByWeek]);
+  }, [resetFlag, tasksByWeek, selectedWeek]);
 
   // Utility functions
   const toggleAll = (dayIndex, value) => {
@@ -151,11 +171,11 @@ const Mid = ({ selectedWeek, resetFlag }) => {
           key={dayIndex}
           title={title}
           tasks={tasks}
-          allChecked={taskStates[dayIndex]?.every((state) => state) || false}
+          allChecked={taskStates[dayIndex]?.every((state) => state) ?? false}
           onToggleAll={() =>
             toggleAll(dayIndex, !taskStates[dayIndex]?.every((state) => state))
           }
-          taskStates={taskStates[dayIndex] || []}
+          taskStates={taskStates[dayIndex] ?? []} // Fallback to empty array
           onToggleTask={(taskIndex) => toggleTask(dayIndex, taskIndex)}
         />
       ))}

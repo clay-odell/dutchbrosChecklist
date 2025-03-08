@@ -9,7 +9,7 @@ import ResetAll from "./ResetAll"; // Import your ResetAll component
 
 const DutchTasks = () => {
   const [selectedShift, setSelectedShift] = useState(""); // State to track selected shift
-  const [selectedWeek, setSelectedWeek] = useState(""); // State to track selected week
+  const [selectedWeek, setSelectedWeek] = useState("Weeks 1 & 3"); // Default to Weeks 1 & 3
   const [resetFlag, setResetFlag] = useState(false); // State to trigger global reset
 
   // Handles dropdown item selection for tasks
@@ -22,15 +22,22 @@ const DutchTasks = () => {
     setSelectedWeek(eventKey);
   };
 
-  // Global reset function
-  const handleResetAll = () => {
-    setResetFlag((prevFlag) => !prevFlag); // Toggle the resetFlag to signal a reset
-  };
+ // Global reset function
+const handleResetAll = () => {
+  // Remove all relevant localStorage items
+  localStorage.removeItem("openingTasksState");
+  localStorage.removeItem("endOfOpeningTasksState");
+  localStorage.removeItem("midTasksState");
+  localStorage.removeItem("closingTasksState");
+
+  // Toggle the resetFlag to signal a reset across components
+  setResetFlag((prevFlag) => !prevFlag);
+};
+
 
   return (
     <>
       <h1>Dutch Bros Shift Lead Task Check List</h1>
-      
 
       <div>
         {/* Dropdown for shift selection */}
@@ -65,7 +72,7 @@ const DutchTasks = () => {
       <br />
       <div>
         {/* Add the global ResetAll button */}
-      <ResetAll onReset={handleResetAll} />
+        <ResetAll onReset={handleResetAll} />
       </div>
 
       <div className="task-content">
@@ -80,10 +87,7 @@ const DutchTasks = () => {
           <Closing selectedWeek={selectedWeek} resetFlag={resetFlag} />
         )}
         <br />
-        
       </div>
-
-      
     </>
   );
 };
