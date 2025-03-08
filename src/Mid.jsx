@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import TaskSection from "./TaskSection";
 
 const Mid = ({ selectedWeek, resetFlag }) => {
@@ -91,21 +91,38 @@ const Mid = ({ selectedWeek, resetFlag }) => {
     ],
   };
 
-  const tasksByWeek =
-    selectedWeek === "Weeks 1 & 3" ? tasksData.weekA : tasksData.weekB;
+  // Use `useMemo` to ensure `tasksByWeek` is stable
+  const tasksByWeek = useMemo(() => {
+    return selectedWeek === "Weeks 1 & 3" ? tasksData.weekA : tasksData.weekB;
+  }, [selectedWeek]);
 
   const initializeTaskStates = (tasks) =>
     tasks.map((day) => day.tasks.map(() => false));
 
-  // State management for task completion
-  const [taskStates, setTaskStates] = useState(
-    initializeTaskStates(tasksByWeek)
-  );
+  // Load state from localStorage or initialize it
+  const loadInitialTaskStates = () => {
+    const savedStates = JSON.parse(localStorage.getItem("midTasksState"));
+    if (savedStates) {
+      return savedStates;
+    }
+    return initializeTaskStates(tasksByWeek);
+  };
 
-  // Reset task states whenever resetFlag or tasksByWeek changes
+  const [taskStates, setTaskStates] = useState(loadInitialTaskStates);
+
+  // Save state to localStorage whenever taskStates change
   useEffect(() => {
-    setTaskStates(initializeTaskStates(tasksByWeek));
-  }, [resetFlag, tasksByWeek]);
+    localStorage.setItem("midTasksState", JSON.stringify(taskStates));
+  }, [taskStates]);
+
+  // Reset state and clear localStorage on resetFlag
+  useEffect(() => {
+    if (resetFlag) {
+      const freshStates = initializeTaskStates(tasksByWeek);
+      setTaskStates(freshStates);
+      localStorage.removeItem("midTasksState"); // Clear local storage
+    }
+  }, [resetFlag]);
 
   // Utility functions
   const toggleAll = (dayIndex, value) => {
