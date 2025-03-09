@@ -228,15 +228,19 @@ const Opening = ({ selectedWeek, resetFlag }) => {
     }, [resetFlag, tasksData]);
   
     const toggleAll = (title, value) => {
+      // Find tasks for the given title from both tasksData and tasksByWeek
+      const tasksForTitle = tasksData.find((section) => section.title === title)?.tasks || 
+        weeklyTaskData.weekA.concat(weeklyTaskData.weekB).find((week) => week.title === title)?.tasks || 
+        []; // Fallback to an empty array if not found
+    
       setTaskStates((prev) => ({
         ...prev,
         [title]: prev[title]
           ? prev[title].map(() => value) // Toggle existing tasks
-          : initializeTaskStates(
-              tasksData.find((section) => section.title === title)?.tasks || []
-            ), // Initialize missing tasks
+          : initializeTaskStates(tasksForTitle), // Initialize if missing
       }));
     };
+    
   
     const toggleTask = (title, index) => {
       setTaskStates((prev) => {

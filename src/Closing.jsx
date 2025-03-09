@@ -242,6 +242,7 @@ const Closing = ({ selectedWeek, resetFlag }) => {
     }));
   };
   
+  
 
   const toggleTask = (title, index) => {
     setTaskStates((prev) => {

@@ -73,8 +73,9 @@ const handleResetAll = () => {
       <div>
         {/* Add the global ResetAll button */}
         <ResetAll onReset={handleResetAll} />
-      </div>
 
+      </div>
+      
       <div className="task-content">
         {/* Render the appropriate component based on the selected shift */}
         {selectedShift === "Opening" && (
