@@ -234,6 +234,7 @@ const Opening = ({ selectedWeek, resetFlag }) => {
       ))}
 
       <h2>Weekly Tasks</h2>
+      <p>Don't forget to take a before and after pic and post it to Leadership Band.</p>
       {tasksByWeek.map(({ title, tasks }) => (
         <div key={title}>
           <button onClick={() => toggleVisibility(title)}>

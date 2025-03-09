@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import TaskSection from "./TaskSection";
 import ClearTasksButton from "./ClearTasks";
 
-const Closing = ({ resetFlag }) => {
+const Closing = ({ selectedWeek, resetFlag }) => {
   // Use `useMemo` to memoize `tasksData`
   const tasksData = useMemo(
     () => [
@@ -80,6 +80,84 @@ const Closing = ({ resetFlag }) => {
     [] // Memoized once as it's static data
   );
 
+  const weeklyTaskData = useMemo(
+    () => ({
+      weekA: [
+        {
+          title: "Monday",
+          tasks: ["Dust cup dispensers.", "Wipe off major splatters."],
+        },
+        {
+          title: "Tuesday",
+          tasks: [
+            "Detail and clean inside and underneath Walk and Back bars' rapid rinser.",
+          ],
+        },
+        {
+          title: "Wednesday",
+          tasks: [
+            "Pull out Walk Taylor machine",
+            "Wipe down wall behind it.",
+            "Wipe the machine down.",
+            "Clean the air vents.",
+            "Sweep and mop.",
+          ],
+        },
+        {
+          title: "Thursday",
+          tasks: [
+            "Clean the base and corners of the floor using floor brush and hot water.",
+          ],
+        },
+        {
+          title: "Friday",
+          tasks: [
+            "Clean and wipe down behind back of all espresso machines.",
+            "Wipe down back of the espresso machines.",
+          ],
+        },
+        {
+          title: "Saturday",
+          tasks: [
+            "Pull out front Drive Taylor machine.",
+            "Wipe down wall behind it.",
+            "Wipe the machine down.",
+            "Clean the air vents.",
+            "Sweep and mop.",
+          ],
+        },
+        {
+          title: "Sunday",
+          tasks: [
+            "Clean out all trash and recycling bins",
+            "Inside",
+            "Outside",
+          ],
+        },
+      ],
+      weekB: [
+        {
+          title: "Monday",
+          tasks: [
+            "Deep clean under Pit.",
+            "Wipe walls.",
+            "Get the nitty gritty on the floor.",
+            "Dust the pipes and legs.",
+            "Get in the corners.",
+            "Sweep and mop.",
+          ],
+        },
+        { title: "Tuesday", tasks: ["Detail Drive fridge door inside and out.", "Wipe down any splatters on the inside.", "Clean front fridge door.",] },
+        { title: "Wednesday", tasks: ["Sweep and mop fridge floor.", "Organize product.", "Check dates for expiration"] },
+        { title: "Thursday", tasks: ["Detail Walk fridge door inside and out.", "Wipe down any splatters on the inside.", "Clean front fridge door."] },
+        { title: "Friday", tasks: ["Wipe down the runner door.", "Wipe down the backdoor.", "Wipe down bathroom door."] },
+        { title: "Saturday", tasks: ["Wipe down Taylor wheels and ice caddy wheels.", "Wipe down all ice bins."] },
+        { title: "Sunday", tasks: ["Detail Pit fridge door inside and out.", "Wipe down any splatters on the inside.", "Clean front fridge door."] },
+      ],
+    }),
+    []
+  );
+
   const initializeTaskStates = (tasks) => tasks.map(() => false);
 
   // Load state from localStorage or initialize it
@@ -128,6 +206,35 @@ const Closing = ({ resetFlag }) => {
       return { ...prev, [title]: updatedStates };
     });
   };
+  // Weekly task visibility states
+  const [weeklyVisibility, setWeeklyVisibility] = useState({});
+
+  const initializeVisibility = (tasksByWeek) =>
+    tasksByWeek.reduce((acc, { title }) => {
+      acc[title] = false; // Initially hide all sections
+      return acc;
+    }, {});
+
+  useEffect(() => {
+    const initialVisibility =
+      selectedWeek === "Weeks 1 & 3"
+        ? initializeVisibility(weeklyTaskData.weekA)
+        : initializeVisibility(weeklyTaskData.weekB);
+    setWeeklyVisibility(initialVisibility);
+  }, [selectedWeek, weeklyTaskData]);
+
+  const toggleVisibility = (title) => {
+    setWeeklyVisibility((prev) => ({
+      ...prev,
+      [title]: !prev[title],
+    }));
+  };
+
+  const tasksByWeek = useMemo(() => {
+    return selectedWeek === "Weeks 1 & 3"
+      ? weeklyTaskData.weekA
+      : weeklyTaskData.weekB;
+  }, [selectedWeek, weeklyTaskData]);
 
   return (
     <>
@@ -135,19 +242,41 @@ const Closing = ({ resetFlag }) => {
       <p>Nightly tasks for shutting down the shop.</p>
 
       <ClearTasksButton taskStates={taskStates} setTaskStates={setTaskStates} />
-      <br />
+
       {tasksData.map(({ title, tasks }) => (
         <TaskSection
           key={title}
           title={title}
           tasks={tasks}
-          allChecked={taskStates[title].every((state) => state)}
+          allChecked={taskStates[title]?.every((state) => state)}
           onToggleAll={() =>
-            toggleAll(title, !taskStates[title].every((state) => state))
+            toggleAll(title, !taskStates[title]?.every((state) => state))
           }
           taskStates={taskStates[title]}
           onToggleTask={(index) => toggleTask(title, index)}
         />
+      ))}
+
+      <h2>Weekly Tasks</h2>
+      {tasksByWeek.map(({ title, tasks }) => (
+        <div key={title}>
+          <button onClick={() => toggleVisibility(title)}>
+            {weeklyVisibility[title] ? "Hide" : "Show"} {title}
+          </button>
+          {weeklyVisibility[title] && (
+            <TaskSection
+              key={title}
+              title={title}
+              tasks={tasks}
+              allChecked={taskStates[title]?.every((state) => state)}
+              onToggleAll={() =>
+                toggleAll(title, !taskStates[title]?.every((state) => state))
+              }
+              taskStates={taskStates[title] || initializeTaskStates(tasks)}
+              onToggleTask={(index) => toggleTask(title, index)}
+            />
+          )}
+        </div>
       ))}
     </>
   );
