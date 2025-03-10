@@ -5,73 +5,31 @@ import ClearTasksButton from "./ClearTasks";
 // Static tasks data
 const tasksData = [
   {
-    title: "Pit Tasks",
+    title: "Pre-Opening Tasks",
     tasks: [
-      "Scoops and Rinse Cup removed and cleaned. (Keep water off after).",
-      "All toppers on syrups and sauces cleaned.",
-      "Pre-mades wiped down, tops cleaned, and filled.",
-      "Check and pull trashes",
+      "Turn on music (University: Open Sonos App and click music icon) via Pandora.",
+      "Ensure outside and inside speakers are at an acceptable volume.",
+      "Fill the sanitizer sink.",
+      "Use test strips to ensure accurate pH levels (200ppm).",
+      "Make sure LB iPads are plugged in and charging.",
+      "Check expiry of milks and other perishable items.",
+      "Write lineup on dry erase board.",
+      "Post lineup to Band (SL).",
+      "Retrieve Order Ahead (OA) and other signs from electrical closet.",
+      "Place OA signage in designated spots.",
+      "Turn on all grinders.",
+      "Warm up Walk Up & Drive Espresso bars: pull two dubs on each head and let fall into drain.",
+      "At 5am, open the Drive and Walkup Windows.",
+      "Dog Drive sidedoor.",
     ],
   },
   {
-    title: "Taylor Tasks",
+    title: "End of Opening Tasks",
     tasks: [
-      "The first odd/even Taylor Machine has been emptied and cleaned.",
-      "The second odd/even Taylor Machine has been emptied and cleaned.",
-      "Both Taylor machines have been refilled and are ready for use.",
-      "Move Taylor machines and wipe down wall and window.",
-    ],
-  },
-  {
-    title: "Espresso Tasks",
-    tasks: [
-      "Backwash machine heads",
-      "Wash all shot tins.",
-      "Wash all mix/steam tins.",
-      "Wash grates, drain grates, and rapid rinse.",
-      "Sanitize/spray and wipe down machine exterior & steam wand.",
-      "Wash all scoops & stirrers.",
-      "Wash both drying mats.",
-      "Ensure all dishes are cleaned.",
-      "Reassemble Espresso machine.",
-    ],
-  },
-  {
-    title: "Walk Bar Tasks",
-    tasks: [
-      "All dishes pulled and washed.",
-      "Bar & Counter wiped down (includes under bar, behind Bunn, and under syrup rack).",
-      "Grinder emptied and wiped down.",
-      "All toppers on syrups and sauces cleaned.",
-    ],
-  },
-  {
-    title: "Off Bar Tasks",
-    tasks: [
-      "Sweep shop floor, getting underneath all bars, ice bins, and counter tops.",
-      "Mop from back of shop to Taps machine.",
-      "Restock fridge: milks, soft top, whip, dry milks, chai, muffin tops, & granola.",
-      "Wash pitchers for teas, lemonade, and cold brew.",
-      "Restock cans of soda, Rebel, and SF Rebel.",
-      "Fill and wipe down ice bins.",
-      "Clean all drains using bowl cleaner.",
-    ],
-  },
-  {
-    title: "End of Night Tasks",
-    tasks: [
-      "Shut down drive bar.",
-      "Mop front half of shop.",
-      "Decaf grinder emptied & wiped down.",
-      "Check all iPads & Verifones are plugged in and charging.",
-      "Close Drive and Walkup tills (SL)",
-      "Tips counted and distributed (SL)",
-      "Triple sink drained and rinsed out",
-      "All rags collected and placed into rag bin.",
-      "Retrieve order ahead signs, and put signage in electrical closet.",
-      "Taps machine shut off and nozzles placed in 32oz mix cup of soda water.",
-      "Turn off music, building lights, and inside lights.",
-      "Ensure all doors and windows are locked and alarm is set.",
+      "Enter deposit into Loomis (by 9am at Owens).",
+      "At the end of each broista's shift, assign closing tasks.",
+      "Count and distribute all tips.",
+      "Pull and take out trashes, pull rag bag and take to dumpster (if necessary).",
     ],
   },
 ];
@@ -80,61 +38,14 @@ const weeklyTaskData = {
   weekA: [
     {
       title: "Monday",
-      tasks: ["Dust cup dispensers.", "Wipe off major splatters."],
+      tasks: [
+        "Detail runner & backdoor, window, handles, silver floor plate, etc.",
+      ],
     },
     {
       title: "Tuesday",
       tasks: [
-        "Detail and clean inside and underneath Walk and Back bars' rapid rinser.",
-      ],
-    },
-    {
-      title: "Wednesday",
-      tasks: [
-        "Pull out Walk Taylor machine",
-        "Wipe down wall behind it.",
-        "Wipe the machine down.",
-        "Clean the air vents.",
-        "Sweep and mop.",
-      ],
-    },
-    {
-      title: "Thursday",
-      tasks: [
-        "Clean the base and corners of the floor using floor brush and hot water.",
-      ],
-    },
-    {
-      title: "Friday",
-      tasks: [
-        "Clean and wipe down behind back of all espresso machines.",
-        "Wipe down back of the espresso machines.",
-      ],
-    },
-    {
-      title: "Saturday",
-      tasks: [
-        "Pull out front Drive Taylor machine.",
-        "Wipe down wall behind it.",
-        "Wipe the machine down.",
-        "Clean the air vents.",
-        "Sweep and mop.",
-      ],
-    },
-    {
-      title: "Sunday",
-      tasks: [
-        "Clean out all trash and recycling bins",
-        "Inside",
-        "Outside",
-      ],
-    },
-  ],
-  weekB: [
-    {
-      title: "Monday",
-      tasks: [
-        "Deep clean under Pit.",
+        "Deep clean under Walk bar.",
         "Wipe walls.",
         "Get the nitty gritty on the floor.",
         "Dust the pipes and legs.",
@@ -143,51 +54,75 @@ const weeklyTaskData = {
       ],
     },
     {
-      title: "Tuesday",
-      tasks: [
-        "Detail Drive fridge door inside and out.",
-        "Wipe down any splatters on the inside.",
-        "Clean front fridge door.",
-      ],
-    },
-    {
       title: "Wednesday",
       tasks: [
-        "Sweep and mop fridge floor.",
-        "Organize product.",
-        "Check dates for expiration",
+        "Deep clean under Drive bar.",
+        "Wipe walls.",
+        "Get the nitty gritty on the floor.",
+        "Dust the pipes and legs.",
+        "Get in the corners.",
+        "Sweep and mop.",
       ],
     },
     {
       title: "Thursday",
       tasks: [
-        "Detail Walk fridge door inside and out.",
-        "Wipe down any splatters on the inside.",
-        "Clean front fridge door.",
+        "Clean all window tracks.",
+        "Dust and deep clean both the tills, inside & out.",
+      ],
+    },
+    {
+      title: "Friday",
+      tasks: ["Detail and clean inside and underneath Drive rapid rinser."],
+    },
+    {
+      title: "Saturday",
+      tasks: [
+        "Detail runner & backdoor, window, handles, silver floor plate, etc.",
+      ],
+    },
+    {
+      title: "Sunday",
+      tasks: ["Deep clean bathroom, toilet, sink, walls.", "Sweep and mop."],
+    },
+  ],
+  weekB: [
+    {
+      title: "Monday",
+      tasks: [
+        "Detail mop sink, bucket, and faucet.",
+        "Wipe down all hand washing sinks.",
+      ],
+    },
+    {
+      title: "Tuesday",
+      tasks: ["Clean interior windows & back of espresso bar."],
+    },
+    {
+      title: "Wednesday",
+      tasks: ["Wipe down all pit syrup racks."],
+    },
+    {
+      title: "Thursday",
+      tasks: [
+        "Take everything off the top of Drive side machine and clean it.",
+        "Clean the lid holders.",
       ],
     },
     {
       title: "Friday",
       tasks: [
-        "Wipe down the runner door.",
-        "Wipe down the backdoor.",
-        "Wipe down bathroom door.",
+        "Dust the tops of lockers, safe, IT cabinets, air curtains.",
+        "Organize and wipe down iPad areas.",
       ],
     },
     {
       title: "Saturday",
-      tasks: [
-        "Wipe down Taylor wheels and ice caddy wheels.",
-        "Wipe down all ice bins.",
-      ],
+      tasks: ["Clean all exterior windows and menus."],
     },
     {
       title: "Sunday",
-      tasks: [
-        "Detail Pit fridge door inside and out.",
-        "Wipe down any splatters on the inside.",
-        "Clean front fridge door.",
-      ],
+      tasks: ["Pull down all syrups from Walk & Drive bar.", "Clean racks."],
     },
   ],
 };
@@ -210,77 +145,87 @@ const Opening = ({ selectedWeek, resetFlag }) => {
 
   const [taskStates, setTaskStates] = useState(() => loadInitialTaskStates());
 
-    // Save state to localStorage whenever taskStates change
-    useEffect(() => {
-      localStorage.setItem("closingTasksState", JSON.stringify(taskStates));
-    }, [taskStates]);
-  
-    // Reset states and clear localStorage on resetFlag
-    useEffect(() => {
-      if (resetFlag) {
-        const freshStates = tasksData.reduce((acc, section) => {
-          acc[section.title] = initializeTaskStates(section.tasks);
-          return acc;
-        }, {});
-        setTaskStates(freshStates);
-        localStorage.removeItem("closingTasksState"); // Clear local storage
-      }
-    }, [resetFlag, tasksData]);
-  
-    const toggleAll = (title, value) => {
-      // Find tasks for the given title from both tasksData and tasksByWeek
-      const tasksForTitle = tasksData.find((section) => section.title === title)?.tasks || 
-        weeklyTaskData.weekA.concat(weeklyTaskData.weekB).find((week) => week.title === title)?.tasks || 
-        []; // Fallback to an empty array if not found
+  // Save state to localStorage whenever taskStates change
+  useEffect(() => {
     
-      setTaskStates((prev) => ({
-        ...prev,
-        [title]: prev[title]
-          ? prev[title].map(() => value) // Toggle existing tasks
-          : initializeTaskStates(tasksForTitle), // Initialize if missing
-      }));
-    };
-    
-  
-    const toggleTask = (title, index) => {
-      setTaskStates((prev) => {
-        const updatedStates = prev[title] ? [...prev[title]] : initializeTaskStates(tasksData.find((section) => section.title === title)?.tasks || []);
-        updatedStates[index] = !updatedStates[index];
-        return { ...prev, [title]: updatedStates };
-      });
-    };
-    
-  
-    const initializeVisibility = (tasksByWeek) =>
-      tasksByWeek.reduce((acc, { title }) => {
-        acc[title] = false; // Initially hide all sections
+    localStorage.setItem("closingTasksState", JSON.stringify(taskStates));
+  }, [taskStates]);
+
+  // Reset states and clear localStorage on resetFlag
+  useEffect(() => {
+    if (resetFlag) {
+      
+      const freshStates = tasksData.reduce((acc, section) => {
+        acc[section.title] = initializeTaskStates(section.tasks);
         return acc;
       }, {});
-  
-    const [weeklyVisibility, setWeeklyVisibility] = useState(() =>
-      initializeVisibility(selectedWeek === "Weeks 1 & 3" ? weeklyTaskData.weekA : weeklyTaskData.weekB)
-    );
-  
-    useEffect(() => {
-      const initialVisibility =
-        selectedWeek === "Weeks 1 & 3"
-          ? initializeVisibility(weeklyTaskData.weekA)
-          : initializeVisibility(weeklyTaskData.weekB);
-      setWeeklyVisibility(initialVisibility);
-    }, [selectedWeek, weeklyTaskData]);
-  
-    const toggleVisibility = (title) => {
-      setWeeklyVisibility((prev) => ({
-        ...prev,
-        [title]: !prev[title],
-      }));
-    };
-  
-    const tasksByWeek = useMemo(() => {
-      return selectedWeek === "Weeks 1 & 3"
+      setTaskStates(freshStates);
+      localStorage.removeItem("closingTasksState"); // Clear local storage
+    }
+  }, [resetFlag, tasksData]);
+
+  const toggleAll = (title, value) => {
+    const tasksForTitle =
+      tasksData.find((section) => section.title === title)?.tasks ||
+      weeklyTaskData.weekA
+        .concat(weeklyTaskData.weekB)
+        .find((week) => week.title === title)?.tasks ||
+      [];
+
+    setTaskStates((prev) => ({
+      ...prev,
+      [title]: prev[title]
+        ? prev[title].map(() => value)
+        : initializeTaskStates(tasksForTitle),
+    }));
+  };
+
+  const toggleTask = (title, index) => {
+    setTaskStates((prev) => {
+      const updatedStates = prev[title]
+        ? [...prev[title]]
+        : initializeTaskStates(
+            tasksData.find((section) => section.title === title)?.tasks || []
+          );
+      updatedStates[index] = !updatedStates[index];
+      return { ...prev, [title]: updatedStates };
+    });
+  };
+
+  const initializeVisibility = (tasksByWeek) =>
+    tasksByWeek.reduce((acc, { title }) => {
+      acc[title] = false; // Initially hide all sections
+      return acc;
+    }, {});
+
+  const [weeklyVisibility, setWeeklyVisibility] = useState(() =>
+    initializeVisibility(
+      selectedWeek === "Weeks 1 & 3"
         ? weeklyTaskData.weekA
         : weeklyTaskData.weekB
-    });
+    )
+  );
+
+  useEffect(() => {
+    const initialVisibility =
+      selectedWeek === "Weeks 1 & 3"
+        ? initializeVisibility(weeklyTaskData.weekA)
+        : initializeVisibility(weeklyTaskData.weekB);
+    setWeeklyVisibility(initialVisibility);
+  }, [selectedWeek]);
+
+  const toggleVisibility = (title) => {
+    setWeeklyVisibility((prev) => ({
+      ...prev,
+      [title]: !prev[title],
+    }));
+  };
+
+  const tasksByWeek = useMemo(() => {
+    return selectedWeek === "Weeks 1 & 3"
+      ? weeklyTaskData.weekA
+      : weeklyTaskData.weekB;
+  }, [selectedWeek]);
 
   return (
     <>
@@ -292,17 +237,20 @@ const Opening = ({ selectedWeek, resetFlag }) => {
           key={title}
           title={title}
           tasks={tasks}
-          allChecked={taskStates[title]?.every((state) => state)}
+          allChecked={taskStates[title]?.every((state) => state) || false}
           onToggleAll={() =>
             toggleAll(title, !taskStates[title]?.every((state) => state))
           }
-          taskStates={taskStates[title]}
+          taskStates={taskStates[title] || initializeTaskStates(tasks)}
           onToggleTask={(index) => toggleTask(title, index)}
         />
       ))}
 
       <h2>Weekly Tasks</h2>
-      <p>Don't forget to take a before and after pic and post it to Leadership Band.</p>
+      <p>
+        Don't forget to take a before and after pic and post it to Leadership
+        Band.
+      </p>
       {tasksByWeek.map(({ title, tasks }) => (
         <div key={title}>
           <button onClick={() => toggleVisibility(title)}>
@@ -310,10 +258,9 @@ const Opening = ({ selectedWeek, resetFlag }) => {
           </button>
           {weeklyVisibility[title] && (
             <TaskSection
-              key={title}
               title={title}
               tasks={tasks}
-              allChecked={taskStates[title]?.every((state) => state)}
+              allChecked={taskStates[title]?.every((state) => state) || false}
               onToggleAll={() =>
                 toggleAll(title, !taskStates[title]?.every((state) => state))
               }
